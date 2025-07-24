@@ -1,37 +1,13 @@
-import { error } from "console";
+import "dotenv/config";
 import express from "express";
 const app = express();
 
-const products = [ {
-
-},
-{
-
-},
-{
-
-},
-];
-
 app.get("/",(rep, res) => {
-    res.send("Api Rest en Node.js");
+    res.json("Api Rest en Node.js");
 });
 
-app.get("/products", (req, res)=> {
-    res.json(products);
-});
-
-app.get("/products/:id", (req, res)=> {
-    const {id} = req.params;
-    
-    const product = products.find((item)=> item.id);
-    if (!product){
-        res.status(404).json({ error: "No existe el protucto"});
-    }
-    res.json(products);
-});
 import productsRouter from "./src/routes/products.router.js";
 app.use("/api", productsRouter);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, ()=> console.log(`http://localhost:${PORT}`))
