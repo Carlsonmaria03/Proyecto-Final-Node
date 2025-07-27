@@ -14,6 +14,7 @@ export const login = async (req, res) => {
     if (email === default_user.email && password === default_user.password) {
         const payload = {id: user.id};
         const expiration = {expiresIn: "1h"};
+        
         const token = jwt.sign(payload, process.env.JWT_SECRET, expiration);
         res.json({token});
     } else {
